@@ -1,5 +1,6 @@
-# hello-world
+# FDA assignments
 
 ==========
 
-This is a test of GitHub, awesome!
+###The R models can be found in `/scripts`:
+Assignment 1: `FDA_assignment1-model.R` - Status: finished the models 
