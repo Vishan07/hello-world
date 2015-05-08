@@ -9,37 +9,64 @@ real <- function(x){
 
 y = real(x)
 
-plot(x,y, axes=T, ylim=c(0,2), typ ='l', ann=F, lwd=2)
-par(tcl= -0.2)
-axis(1, at=seq(-15,15, by=1),labels=F,lwd=1,lwd.ticks=1)
+plot(x,y, axes=T, ylim=c(-0.5,2), typ ='l', ann=F, lwd=3)
+par(tcl= -0.3, bg= "aliceblue")
+axis(1, at=seq(0,30, by=1),labels=F,lwd=1,lwd.ticks=1)
 
-title(main="Actual averages", sub="x-seed", ylab="Averages (mu)")
+title(main="Sample Averages", sub="X-values", ylab="Averages (mu)")
 
 #real function
-linear.model = lm(y~x)
-abline(linear.model, col="black", lwd=3)
+real.function = lm(y~x)
+abline(real.function, col="black", lwd=5)
 
 xAll = vector()
 yAll = vector()
 
 oneSample <- function(x,n){
   for (i in 1:n){
-    xSample <- sample(x, 20, replace=TRUE, prob = NULL)
+    xSample <- sample(x, 20, replace=TRUE, prob = NULL)    
+    
+    #order samples (otherwise messy lines)
+    xSample <- sort(xSample, decreasing=FALSE)
     ySample <- real(xSample)
-    #nog opslaan in matrix
-    #sample = c(xSample, ySample)
-    #mat[i,] <- sample
-    #points(xSample,ySample) is een test of al de punten wel op real liggen
+    
+    #points(xSample,ySample) is a test if the points are actually on the line
     points(xSample,ySample)
-    reg.line = lm(ySample~xSample)
-    abline(reg.line, col="red", lwd=1.5)
+    linear.model = lm(ySample~xSample)
+    #abline(linear.model, col="red", lwd=1)
+    
+    fit2 <- lm(ySample~xSample + I(xSample^2))
+    #points(xSample, predict(fit2), type="l", col="#FF0A85", lwd=1)
+    
+    fit3 <- lm(ySample~xSample + I(xSample^2) + I(xSample^3))
+   # points(xSample,predict(fit3), type="l", col="#66FF33", lwd=1)
+    
     xAll = c(xAll, xSample)
     yAll = c(yAll, ySample)
+    xAll = sort(xAll)
+    yAll = real(xAll)
   }
-  avgReg = lm(ySample~xSample)
-  abline(avgReg, col="blue", lwd=3)
+  #Linear regression lines
+  avgReg = lm(yAll~xAll)
+  if (n==10) {abline(avgReg, col="darkgreen", lwd=5)}
+  if (n ==100) {abline(avgReg, col="darkgreen", lwd=5)}
+  if (n == 1000) {abline(avgReg, col="darkgreen", lwd=5)}
+  #quadratic regression lines
+  xAll2 = xAll^2
+  avgReg2 = lm(yAll~xAll + I(xAll2))
+  if (n==10) {lines(xAll, predict(avgReg2), col="#0A47FF", lwd=5)}
+  if (n ==100) {lines(xAll, predict(avgReg2), col="#0A47FF", lwd=5)}
+  if (n == 1000) {lines(xAll, predict(avgReg2), col="#0A47FF", lwd=5)}
+  #cubic regression lines
+  xAll2 = xAll^2
+  xAll3 = xAll^3
+  avgReg3 = lm(yAll~xAll + I(xAll2) + I(xAll3))
+  if (n==10) {lines(xAll, predict(avgReg3), col="darkorange", lwd=5)}
+  if (n ==100) {lines(xAll, predict(avgReg3), col="darkorange", lwd=5)}
+  if (n == 1000) {lines(xAll, predict(avgReg3), col="darkorange", lwd=5)}
 }
 
 #run the function
 tenSamples = oneSample(x,10)
-
+#hundredSamples = oneSample(x,100)
+#thousandSamples = oneSample(x,1000)
