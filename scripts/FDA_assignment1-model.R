@@ -108,5 +108,5 @@ oneSample <- function(x,n){
 
 #run the function
 tenSamples = oneSample(x,10)
-#hundredSamples = oneSample(x,25)
-#thousandSamples = oneSample(x,250)
+#twentyfiveSamples = oneSample(x,25)
+#twofiftySamples = oneSample(x,250)
