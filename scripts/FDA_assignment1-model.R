@@ -37,7 +37,7 @@ oneSample <- function(x,n){
     #points(xSample,ySample) is a test if the points are actually on the line
     points(xSample,ySample)
     linear.model = lm(ySample~xSample)
-    abline(linear.model, col="red", lwd=1)
+    #abline(linear.model, col="red", lwd=1)
     mat[i,]=coef(linear.model)
     
     fit2 <- lm(ySample~xSample + I(xSample^2))
@@ -62,14 +62,14 @@ oneSample <- function(x,n){
     abline(lin.reg <- avgReg, col="darkgreen", lwd=5)
     mat[11,] = coef(lin.reg)
   }
-  if (n ==25) {
-    abline(lin.reg <- avgReg, col="darkgreen", lwd=5)
-    mat[26,] = coef(lin.reg)
-  }
-  if (n == 250) {
-    abline(lin.reg <- avgReg, col="darkgreen", lwd=5)
-    mat[251,] = coef(lin.reg)
-  }
+  #if (n ==25) {
+  #  abline(lin.reg <- avgReg, col="darkgreen", lwd=5)
+  #  mat[26,] = coef(lin.reg)
+  #}
+  #if (n == 250) {
+  #  abline(lin.reg <- avgReg, col="darkgreen", lwd=5)
+  #  mat[251,] = coef(lin.reg)
+  #}
   #quadratic regression lines
   xAll2 = xAll^2
   avgReg2 = lm(yAll~xAll + I(xAll2))
@@ -77,14 +77,14 @@ oneSample <- function(x,n){
     lines(xAll, predict(avgReg2), col="#0A47FF", lwd=5)
     mat2[11,] = coef(avgReg2)
   }
-  if (n ==25) {
-    lines(xAll, predict(avgReg2), col="#0A47FF", lwd=5)
-    mat2[26,] = coef(avgReg2)
-  }
-  if (n == 250) {
-    lines(xAll, predict(avgReg2), col="#0A47FF", lwd=5)
-    mat2[250,] = coef(avgReg2)
-  }
+  #if (n ==25) {
+  #  lines(xAll, predict(avgReg2), col="#0A47FF", lwd=5)
+  #  mat2[26,] = coef(avgReg2)
+  #}
+  #if (n == 250) {
+  #  lines(xAll, predict(avgReg2), col="#0A47FF", lwd=5)
+  #  mat2[251,] = coef(avgReg2)
+  #}
   #cubic regression lines
   xAll2 = xAll^2
   xAll3 = xAll^3
@@ -93,20 +93,21 @@ oneSample <- function(x,n){
     lines(xAll, predict(avgReg3), col="darkorange", lwd=5)
     mat3[11,] =coef(avgReg3)
   }
-  if (n ==25) {
-    lines(xAll, predict(avgReg3), col="darkorange", lwd=5)
-    mat3[26,] = coef(avgReg3)
+  #if (n ==25) {
+  #  lines(xAll, predict(avgReg3), col="darkorange", lwd=5)
+  #  mat3[26,] = coef(avgReg3)
+  #}
+  #if (n == 250) {
+  #  lines(xAll, predict(avgReg3), col="darkorange", lwd=5)
+  #  mat3[251,] =coef(avgReg3)
   }
-  if (n == 250) {
-    lines(xAll, predict(avgReg3), col="darkorange", lwd=5)
-    mat3[251,] =coef(avgReg3)
-  }
-  return(mat)
+  #return(mat)
   #return(mat2)
   #return(mat3)
-}
+#}
 
 #run the function
-#tenSamples = oneSample(x,10)
+tenSamples = oneSample(x,10)
 #twentyfiveSamples = oneSample(x,25)
-twofiftySamples = oneSample(x,250)
+#twofiftySamples = oneSample(x,250)
+
