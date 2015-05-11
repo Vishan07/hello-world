@@ -32,7 +32,13 @@ oneSample <- function(x,n){
     
     #order samples (otherwise messy lines)
     xSample <- sort(xSample, decreasing=FALSE)
-    ySample <- real(xSample)
+    #ySample <- real(xSample)
+    #toegevoegd door Jelle
+    genSample <- function(x) { 
+      return(rnorm(1,mean=real(x), sd=0.2))
+    }
+    
+    ySample <- sapply(xSample, genSample)
     
     #points(xSample,ySample) is a test if the points are actually on the line
     points(xSample,ySample)
