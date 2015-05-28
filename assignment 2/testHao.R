@@ -12,16 +12,32 @@ func <- function(a,x){
 
 #2. distance function (helper function for the general function)
 distance <- function(x){
-  xSquare <- sapply(x, function(x) x^2)
+  #xSquare <- apply(x,1:2, function(x) x^2)
+  xSquare <- x^2
   sumSquares <- sum(xSquare)
   euclDist <- sqrt(sumSquares)
   return(euclDist)
 }
 
 #3. distance per row
-#distRow <- function(x){
-  
-#}
+distRow <- function(x){
+  matDist <- apply(x, 1, distance)
+  return(matDist)
+}
+
+# 4. nearest neighbour -- Hoofdfunctie
+NN <- function(n){
+  #PSUEDO
+  #matrix (met de dimensies) - drawSamples
+  #bereken distRow
+  #geef which.min(distRow) <- geeft rij aan van de laagste
+  # geef matrix[which.min(distRow),]
+  matDim <- drawSamples(n)
+  distRow <- distRow(matDim)
+  #nearest <- matDim[which.min(distRow),] --- geeft de nearest coordinaten
+  nearest <- min(distRow)
+  return(nearest)
+}
 
 #graph the standard function
 #range for graph
@@ -52,17 +68,17 @@ drawSamples <- function(n){
   return(samples)
 }
 
-#nearest neighbour
-findNN <- function(x){
-  NN <- min(x^2)
-  return(NN)
+#5. HET EXPERIMENT
+# De functie returned de 1-nearest neighbour van elke dimensie
+predictions <- function(dimensions){
+  vec <- vector()
+  for (i in dimensions){
+    vec[i] = NN(i)
+  }
+  return(vec)
 }
 
-samples1D = drawSamples(1)
-oneDy = func(a,samples1D)
-#plot(samples1D, oneDy)
-
-
+plot(dimensions, predictions(dimensions),xlab="Dimensions",ylab="Distance 1-Nearest Neighbour")
 
 
 
