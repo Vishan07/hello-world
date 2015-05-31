@@ -1,5 +1,6 @@
 #dimensions vector, dimensions run from 1-32, with interval 1
 dimensions <- seq(from= 1, to=32, by=1)
+#dimensions <- c(1,2,4,8,16,32)
 
 #general functions
 #parameter a - chosen for its output in the regular function
@@ -101,4 +102,11 @@ predictions2 <- function(dimensions) {
 
 #Puntje 3 van de opdracht
 #Geeft de plot waar de output het verschil is tussen de voorspelde waarde en de eigenlijke y
-plot(dimensions, 1-predictions2(dimensions),xlab="Dimensions",ylab="Distance from Y0 (delta Y)", col="red", lwd=2)
+#plot(dimensions, 1-predictions2(dimensions),xlab="Dimensions",ylab="Distance from Y0 (delta Y)", col="red", lwd=2)
+
+#Test sensibility
+#sensibility <-repeatExp(10)
+#plot(sensibility,ylab = "Distance between predicted Y0 and actual Y")
+#hist(sensibility,xlab="Distance between predicted Y0 and actual Y")
+
+
